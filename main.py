@@ -7,7 +7,7 @@ def main():
     shop_intro()
 
     while True:
-        choice = input('Select your choices: \n')
+        choice = input('What is your choices: ')
         try:
             user_choice = int(choice)
             if user_choice == 5:
@@ -25,8 +25,22 @@ def main():
                 coffee_price = selected_choice['price']
                 coffee_quantity = selected_choice['quantity']
                 
+                quantity = input("How many: ")
+                try:
+                    user_coffee_quantity = int(quantity)
+                    if user_coffee_quantity > coffee_quantity or coffee_quantity == 0:
+                        print("not enough stocks\n")
+                        
+                    else:
+                        selected_choice['quantity'] -= user_coffee_quantity
+                        print(f"remaning stocs {coffee_quantity}")
+                    
+
+                except ValueError:
+                    print("Enter only numbers")
+                
             
-        except:
+        except ValueError:
             print(f"{user_choice} is Error. Options Consist of numbers")
 
 
