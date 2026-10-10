@@ -11,8 +11,7 @@ def main():
         try:
             user_choice = int(choice)
             if user_choice == 5:
-                print(f"you entered: {user_choice}. Therefore, the system is quiting....\n")
-                print("Successfully exit the system")
+                print(f"you entered: {user_choice}. Therefore, the system is quiting...\n")
                 break
             elif user_choice in valid_user_choice:
                 selected_choice = None
@@ -28,12 +27,12 @@ def main():
                 quantity = input("How many: ")
                 try:
                     user_coffee_quantity = int(quantity)
-                    if user_coffee_quantity > coffee_quantity or coffee_quantity == 0:
+                    if user_coffee_quantity > coffee_quantity:
                         print("not enough stocks\n")
                         
                     else:
                         selected_choice['quantity'] -= user_coffee_quantity
-                        print(f"remaning stocs {coffee_quantity}")
+                        print(f"remaning stocs is {selected_choice['quantity']}")
                     
 
                 except ValueError:
@@ -41,8 +40,8 @@ def main():
                 
             
         except ValueError:
-            print(f"{user_choice} is Error. Options Consist of numbers")
-
+            print(f"{user_choice} is Error. Options Consist of numbers only")
+    print("Successfully Quiting the system")
 
 
 
