@@ -31,8 +31,13 @@ def main():
                         print("not enough stocks\n")
                         
                     else:
+                        total_cost = coffee_price * coffee_quantity
                         selected_choice['quantity'] -= user_coffee_quantity
+                        
+                        print(f"you ordered {coffee_name}")
+                        print(f"the total cost is: {total_cost}")
                         print(f"remaning stocs is {selected_choice['quantity']}")
+                    
                     
 
                 except ValueError:
