@@ -1,14 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from constants import available_coffee
 
 USER_BALANCE = 500
-
-available_coffee = [
-    {"id": 1, "name": "Black Coffee",   "price": 100, "quantity": 2},
-    {"id": 2, "name": "Choco Latte",    "price": 150, "quantity": 2},
-    {"id": 3, "name": "Mocha Coffee",   "price": 200, "quantity": 2},
-    {"id": 4, "name": "Caramel Coffee", "price": 250, "quantity": 2},
-]
 
 curr_balance = USER_BALANCE
 order = []
