@@ -42,6 +42,54 @@ total_label = Label(window, text="Total: ₱0",
                     font=('Arial', 14, 'bold'), bg="#c1c1c1", fg="#3b2a1a")
 total_label.pack(pady=(0, 10))
 
+
+coffee_widgets = {}
+
+
+def build_menu():
+    for coffee in available_coffee:
+        row = Frame(menu_frame, bg="#c1c1c1")
+        row.pack(fill="x", pady=5)
+
+        Label(row, text=f"{coffee['name']}  —  ₱{coffee['price']}",
+              font=('Arial', 12), bg="#c1c1c1", anchor="w").pack(side=LEFT)
+
+        stock_lbl = Label(row, text=f"x{coffee['quantity']}",
+                          font=('Arial', 12, 'bold'), bg="#c1c1c1", fg="#555")
+        stock_lbl.pack(side=RIGHT, padx=(0, 10))
+
+        add_btn = Button(row, text="Add",
+                         font=('Arial', 10, 'bold'),
+                         bg="#f5deb3", activebackground="#e0c89a",
+                         width=6,
+                         command=lambda c=coffee: add_to_order(c))
+        add_btn.pack(side=RIGHT)
+
+        coffee_widgets[coffee["id"]] = {"stock": stock_lbl, "button": add_btn}
+
+
+build_menu()
+
+btn_frame = Frame(window, bg="#c1c1c1")
+btn_frame.pack(pady=(0, 20))
+
+Button(btn_frame, text="Checkout", font=('Arial', 12, 'bold'),
+       bg="#8fd18f", activebackground="#6bb96b",
+       width=12, command=checkout).grid(row=0, column=0, padx=8)
+
+Button(btn_frame, text="Clear Order", font=('Arial', 12, 'bold'),
+       bg="#f0a0a0", activebackground="#d98080",
+       width=12, command=clear_order).grid(row=0, column=1, padx=8)
+
+refresh_menu()
+refresh_order()
+refresh_balance()
+
+window.mainloop()
+
+
+
+
 def refresh_menu():
     for coffee in available_coffee:
         w = coffee_widgets[coffee["id"]]
@@ -126,46 +174,3 @@ def checkout():
         f"Thank you! Remaining balance: ₱{curr_balance}"
     )
 
-coffee_widgets = {}
-
-
-def build_menu():
-    for coffee in available_coffee:
-        row = Frame(menu_frame, bg="#c1c1c1")
-        row.pack(fill="x", pady=5)
-
-        Label(row, text=f"{coffee['name']}  —  ₱{coffee['price']}",
-              font=('Arial', 12), bg="#c1c1c1", anchor="w").pack(side=LEFT)
-
-        stock_lbl = Label(row, text=f"x{coffee['quantity']}",
-                          font=('Arial', 12, 'bold'), bg="#c1c1c1", fg="#555")
-        stock_lbl.pack(side=RIGHT, padx=(0, 10))
-
-        add_btn = Button(row, text="Add",
-                         font=('Arial', 10, 'bold'),
-                         bg="#f5deb3", activebackground="#e0c89a",
-                         width=6,
-                         command=lambda c=coffee: add_to_order(c))
-        add_btn.pack(side=RIGHT)
-
-        coffee_widgets[coffee["id"]] = {"stock": stock_lbl, "button": add_btn}
-
-
-build_menu()
-
-btn_frame = Frame(window, bg="#c1c1c1")
-btn_frame.pack(pady=(0, 20))
-
-Button(btn_frame, text="Checkout", font=('Arial', 12, 'bold'),
-       bg="#8fd18f", activebackground="#6bb96b",
-       width=12, command=checkout).grid(row=0, column=0, padx=8)
-
-Button(btn_frame, text="Clear Order", font=('Arial', 12, 'bold'),
-       bg="#f0a0a0", activebackground="#d98080",
-       width=12, command=clear_order).grid(row=0, column=1, padx=8)
-
-refresh_menu()
-refresh_order()
-refresh_balance()
-
-window.mainloop()
